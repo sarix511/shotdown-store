@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SHOTDOWN ID STORE</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* START SCREEN */
+    #startScreen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000;
+    }
+
+    #startBtn {
+      padding: 20px 40px;
+      font-size: 2rem;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #f00, 0 0 40px #f00, 0 0 60px #f00;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 20px #f00; }
+      50% { box-shadow: 0 0 40px #0f0; }
+      100% { box-shadow: 0 0 20px #f00; }
+    }
+
+    /* INTRO VIDEO */
+    #introVideo {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      z-index: 10;
+    }
+
+    /* DP Overlay */
+    #dpOverlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      z-index: 11;
+      box-shadow: 0 0 20px 5px #f00, 0 0 40px 10px #0f0, 0 0 60px 15px #00f;
+      animation: pulse 2s infinite;
+      display: none;
+    }
+
+    /* MAIN ID CONTENT */
+    #mainContent {
+      display: none;
+      background: white;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      font-size: 2rem;
+      margin: 20px 0;
+      color: black;
+      text-shadow: 0 0 5px red;
+    }
+
+    .id-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      overflow: hidden;
+      transition: transform 0.4s ease;
+      margin: 30px auto;
+      max-width: 600px;
+    }
+
+    .id-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+    }
+
+    .id-img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .id-details {
+      padding: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      color: black;
+    }
+
+    .cart-btn {
+      display: block;
+      margin: 20px auto 30px;
+      background: #00cc66;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00cc66;
+      text-decoration: none;
+      text-align: center;
+      transition: 0.3s ease;
+    }
+
+    .cart-btn:hover {
+      background: #00b359;
+      box-shadow: 0 0 20px #00ff88;
+    }
+  </style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+  <button id="startBtn">Launch🚀</button>
+</div>
+
+<!-- INTRO VIDEO -->
+<iframe id="introVideo" allowfullscreen allow="autoplay; fullscreen"></iframe>
+
+<!-- GLOWING DP -->
+<img id="dpOverlay" src="https://i.postimg.cc/DfLH3Shm/970813b6b239d3de6dce22b989b643df.jpg" alt="DP">
+
+<!-- ID STORE CONTENT -->
+<div id="mainContent">
+  <header>🛒 SHOTDOWN ID STORE</header>
+
+  <!-- ID 1 -->
+  <div class="id-card">
+    <img class="id-img" src="https://i.postimg.cc/BnzfQRVv/Screenshot-20250726-012716-998d3425f9e75a0428f0fabdce419960.jpg" />
+    <div class="id-details">
+      ID FOR SALE — FULL CHANCE ACCOUNT<br>
+      58 LEVEL • PRIME LEVEL 8 • S2 ACCOUNT<br>
+      PRICE: 87K
+    </div>
+    <a class="cart-btn" href="https://wa.me/923164298830" target="_blank">Add to Cart</a>
+  </div>
+
+  <!-- ID 2 -->
+  <div class="id-card">
+    <img class="id-img" src="https://i.postimg.cc/8kb8r709/Screenshot-20250725-005038-c28519d624689b8d548e2809af584b0c.jpg" />
+    <div class="id-details">
+      ACCOUNT FOR SALE — FULL CHANCE<br>
+      2 EVOGUNS • LEVEL 3 & 4<br>
+      PRICE: 2.2K
+    </div>
+    <a class="cart-btn" href="https://wa.me/923164298830" target="_blank">Add to Cart</a>
+  </div>
+
+  <!-- ID 3 -->
+  <div class="id-card">
+    <img class="id-img" src="https://i.postimg.cc/Kv9dJdF5/Screenshot-20250705-120853-998d3425f9e75a0428f0fabdce419960.jpg" />
+    <div class="id-details">
+      ACCOUNT FOR SALE — S1 TO ALL BUNDLES<br>
+      1.6K VAULT<br>
+      PRICE: 3.4M
+    </div>
+    <a class="cart-btn" href="https://wa.me/923164298830" target="_blank">Add to Cart</a>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+  const startBtn = document.getElementById('startBtn');
+  const startScreen = document.getElementById('startScreen');
+  const introVideo = document.getElementById('introVideo');
+  const dp = document.getElementById('dpOverlay');
+  const main = document.getElementById('mainContent');
+
+  startBtn.addEventListener('click', () => {
+    startScreen.style.display = 'none';
+    introVideo.style.display = 'block';
+    dp.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    introVideo.src = "https://streamable.com/e/5oawx3?autoplay=1&nocontrols=1";
+    setTimeout(showMainContent, 12000); // adjust time to video length
+  });
+
+  function showMainContent() {
+    introVideo.remove();
+    dp.remove();
+    main.style.display = 'block';
+    document.body.style.overflow = 'auto';
+  }
+</script>
+
+</body>
+</html>
