@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="en">  <head>    <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+  <title>SHOTDOWN ESPORTS</title>  
+  <script type="module">
+    // Firebase Integration
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";const firebaseConfig = {
+  apiKey: "AIzaSyDgVpnLQIsUOXPAxymp3vZ4KOCkr2WJpGQ",
+  authDomain: "shotdown-esport.firebaseapp.com",
+  projectId: "shotdown-esport",
+  storageBucket: "shotdown-esport.firebasestorage.app",
+  messagingSenderId: "148073912260",
+  appId: "1:148073912260:web:14af1d00d221ff64b03691",
+  measurementId: "G-GXG592GSSJ"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+  </script>
+  <style>  
+    html, body {  
+      margin: 0;  
+      padding: 0;  
+      height: 100%;  
+      background: #000;  
+      font-family: Arial, sans-serif;  
+      color: #f00;  
+      overflow-x: hidden;  
+    }
+    #notification {  
+      position: fixed;  
+      top: 0;  
+      width: 100%;  
+      background: red;  
+      color: #fff;  
+      text-align: center;  
+      padding: 10px;  
+      font-weight: bold;  
+      animation: slideDown 1s ease-in-out;  
+      z-index: 9999;  
+    }  
+    @keyframes slideDown {
+      from { top: -50px; }
+      to { top: 0; }
+    }
+    #startScreen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000;
+    }
+    #startBtn {
+      padding: 20px 40px;
+      font-size: 2rem;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #f00, 0 0 40px #f00, 0 0 60px #f00;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 20px #f00; }
+      50% { box-shadow: 0 0 40px #0f0; }
+      100% { box-shadow: 0 0 20px #f00; }
+    }
+    #introVideo {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      z-index: 10;
+    }
+    #dpOverlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      z-index: 11;
+      box-shadow: 0 0 20px 5px #f00, 0 0 40px 10px #0f0, 0 0 60px 15px #00f;
+      animation: pulse 2s infinite;
+      display: none;
+    }
+    #mainContent {
+      display: none;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      font-size: 2rem;
+      margin: 20px 0;
+      text-shadow: 0 0 10px #f00;
+    }
+    .section {
+      background: #111;
+      border: 1px solid #333;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #f00;
+      text-align: center;
+    }
+    .section h2 {
+      color: #f00;
+    }
+    a.buttonLink {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #f00;
+      color: black;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #f00;
+    }
+    footer {
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+    #ads {
+      display: flex;
+      overflow: hidden;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      border: 2px solid red;
+      box-shadow: 0 0 10px red;
+    }
+    #ads img {
+      width: 100%;
+      flex-shrink: 0;
+      animation: slide 16s infinite;
+      border: 2px solid #f00;
+      box-shadow: 0 0 15px #f00;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-100%); }
+      50% { transform: translateX(-200%); }
+      75% { transform: translateX(-300%); }
+      100% { transform: translateX(0); }
+    }
+    #leaderboard table {
+      width: 100%;
+      color: #fff;
+      border-collapse: collapse;
+    }
+    #leaderboard th, #leaderboard td {
+      border: 1px solid #f00;
+      padding: 8px;
+    }
+    #leaderboard th {
+      background: #222;
+    }
+    .top-player {
+      background: linear-gradient(to right, gold, red);
+      color: black;
+      font-weight: bold;
+      text-shadow: 0 0 5px gold;
+      animation: shine 2s infinite;
+    }
+    @keyframes shine {
+      0% { background-position: 0%; }
+      100% { background-position: 100%; }
+    }
+  </style>  
+</head>  
+<body><!-- Floating WhatsApp Button -->
+<a href="https://wa.me/989179371697" target="_blank" class="whatsapp-btn">
+    <img src="https://i.postimg.cc/66bDGhgt/images-1.jpg" alt="WhatsApp" />
+</a>
+
+<style>
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+}
+.whatsapp-btn img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #25D366, 0 0 30px #25D366, 0 0 45px #25D366;
+    animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+    from { box-shadow: 0 0 10px #25D366, 0 0 20px #25D366, 0 0 30px #25D366; }
+    to { box-shadow: 0 0 20px #25D366, 0 0 40px #25D366, 0 0 60px #25D366; }
+}
+</style>
+  <div id="notification">🚨 New Paid Tournament Starts!</div>
+  <div id="startScreen">  
+    <button id="startBtn">Launch🚀</button>  
+  </div>
+  <iframe id="introVideo" allowfullscreen allow="autoplay; fullscreen"></iframe>
+  <img id="dpOverlay" src="https://i.postimg.cc/bNVwbBLh/file-00000000870461f8a6c577984e98cfaf.png" alt="DP">
+  <div id="mainContent">  
+    <header>🔥 SHOTDOWN ESPORTS 🔥</header>
+    <div id="ads">  
+      <img src="https://i.postimg.cc/7Y3r8hTW/fa16c1fbedf78148009999701ceb7088.jpg">  
+      <img src="https://i.postimg.cc/4NVsfwjw/2694effa425421a062000cb63f95598e.jpg">  
+      <img src="https://i.postimg.cc/QMsLd3cd/2471b47859a374ab55be7a3023b665f1.jpg">  
+      <img src="https://i.postimg.cc/mr60NF0t/e79d5b088e47cb55a3f0e6aca6cab5dc.jpg">  
+    </div>
+    <div class="section" id="freeTournament">  
+      <h2>🎯 Free Tournament</h2>  
+      <p>Match Timing: <strong>Stoppedt</strong></p>  
+      <p>Room ID : <strong>stopped</strong></p>  
+      <p>Room Pass: <strong>Stopped</strong></p>  
+      <a class="buttonLink" href="https://chat.whatsapp.com/IRKiXwFWOelBXF6cJ5qNCh?mode=ac_t" target="_blank">Join Free Tournament</a>  
+    </div>
+    <div class="section" id="paidTournament">  
+      <h2>💰 Paid Tournament</h2>  
+      <p>Coming Soon…</p>  
+      <a class="buttonLink" style="pointer-events: none; opacity: 0.5;">Paid Tournament</a>  
+    </div>
+    <div class="section" id="rules">  
+      <h2>📜 Rules</h2>  
+      <ul style="list-style:none; padding:0; line-height:1.8;">  
+        <li>🚫 No Hacking or Cheating</li>  
+        <li>🕒 Be On Time</li>  
+        <li>🤝 Respect Players & Admins</li>  
+        <li>No bombing grenades⚠️</li>  
+        <li>🚫Grip6@1a1)9Q BANNED 🚫</li>  
+      </ul>  
+    </div>
+    <div class="section" id="leaderboard">  
+      <h2>🏆 Leaderboard</h2>  
+      <table>  
+        <thead>  
+          <tr><th>Rank</th><th>Player</th><th>Points</th></tr>  
+        </thead>  
+        <tbody>  
+          <tr class="top-player"><td>1</td><td>Hᴀʏᴀᴛᴏ <3 🎖️ | Purchaser</td><td>8000</td></tr>  
+          <tr><td>2</td><td>ROBIN <3 🎖️ | M950 Plyr</td><td>6000</td></tr>  
+          <tr><td>3</td><td>Cuppa 🎖️ | Rusher</td><td>1100</td></tr>  
+          <tr><td>4</td><td>Mouzcake 🎖️ | rusher</td><td>600</td></tr>  
+          <tr><td>5</td><td id="liveUser">Updating…</td><td>???</td></tr>  
+        </tbody>  
+      </table>  
+    </div>
+    <footer>&copy; 2025 SHOTDOWN ESPORTS. All rights reserved.</footer>
+  </div>
+  <script>  
+    const startBtn = document.getElementById('startBtn');  
+    const startScreen = document.getElementById('startScreen');  
+    const introVideo = document.getElementById('introVideo');  
+    const dp = document.getElementById('dpOverlay');  
+    const main = document.getElementById('mainContent');  
+    const liveUser = document.getElementById('liveUser');
+    startBtn.addEventListener('click', () => {
+      startScreen.style.display = 'none';
+      introVideo.style.display = 'block';
+      dp.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      introVideo.src = "https://streamable.com/e/5oawx3?autoplay=1&nocontrols=1";
+      setTimeout(showMainContent, 12000);
+    });
+    function showMainContent() {
+      introVideo.remove();
+      dp.remove();
+      main.style.display = 'block';
+      document.body.style.overflow = 'auto';
+    }
+    let currentCount = 100 + Math.floor(Math.random() * 50);
+    setInterval(() => {
+      const fluctuation = Math.floor(Math.random() * 10 - 5);
+      currentCount = Math.max(0, currentCount + fluctuation);
+      liveUser.innerText = `${currentCount} Watching`;
+    }, 3000);
+  </script>
+</body>
+</html>
